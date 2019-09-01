@@ -6,17 +6,9 @@ endif()
 
 project(am LANGUAGES CXX)
 
-function(add_headers VAR)
-  set(headers ${${VAR}})
-  foreach (header ${ARGN})
-    set(headers ${headers} ${CMAKE_CURRENT_SOURCE_DIR}/${header})
-  endforeach()
-  set(${VAR} ${headers} PARENT_SCOPE)
-endfunction()
-
-add_headers(HEADERS am.h halfint.h halfint_fmt.h
-                    racah_reduction.h rme.h
-                    wigner_gsl.h wigner_gsl_twice.h)
+set(HEADERS am.h halfint.h halfint_fmt.h
+            racah_reduction.h rme.h
+            wigner_gsl.h wigner_gsl_twice.h)
 set(SOURCES am.cpp halfint.cpp)
 set(TARGET am)
 
