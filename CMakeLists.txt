@@ -6,13 +6,21 @@ endif()
 
 project(am LANGUAGES CXX)
 
-set (SOURCES am.cpp halfint.cpp
-             am.h halfint.h halfint_fmt.h
-             racah_reduction.h rme.h
-             wigner_gsl.h wigner_gsl_twice.h)
-set (TARGET am)
+function(add_headers VAR)
+  set(headers ${${VAR}})
+  foreach (header ${ARGN})
+    set(headers ${headers} ${CMAKE_CURRENT_SOURCE_DIR}/${header})
+  endforeach()
+  set(${VAR} ${headers} PARENT_SCOPE)
+endfunction()
 
-add_library(${TARGET} STATIC ${SOURCES})
+add_headers(HEADERS am.h halfint.h halfint_fmt.h
+                    racah_reduction.h rme.h
+                    wigner_gsl.h wigner_gsl_twice.h)
+set(SOURCES am.cpp halfint.cpp)
+set(TARGET am)
+
+add_library(${TARGET} STATIC ${SOURCES} ${HEADERS})
 
 target_link_libraries(${TARGET} PUBLIC m fmt::fmt)
 
@@ -22,4 +30,4 @@ target_link_libraries(${TARGET} PUBLIC Eigen3::Eigen)
 find_package(GSL REQUIRED)
 target_link_libraries(${TARGET} PUBLIC GSL::gsl GSL::gslcblas)
 
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
+target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
