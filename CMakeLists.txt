@@ -30,4 +30,4 @@ target_link_libraries(${TARGET} PUBLIC Eigen3::Eigen)
 find_package(GSL REQUIRED)
 target_link_libraries(${TARGET} PUBLIC GSL::gsl GSL::gslcblas)
 
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
