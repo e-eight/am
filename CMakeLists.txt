@@ -16,7 +16,7 @@ add_library(${TARGET} STATIC ${SOURCES} ${HEADERS})
 
 target_link_libraries(${TARGET} PUBLIC m fmt::fmt)
 
-find_package(Eigen3 REQUIRED)
+# find_package(Eigen3 REQUIRED)
 target_link_libraries(${TARGET} PUBLIC Eigen3::Eigen)
 
 find_package(GSL REQUIRED)
